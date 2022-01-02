@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ffmpeg/core": "^0.10.0",
+    "@ffmpeg/ffmpeg": "^0.10.1",
     "@mantine/core": "^3.4.3",
     "@mantine/dropzone": "^3.4.3",
     "@mantine/hooks": "^3.4.3",
