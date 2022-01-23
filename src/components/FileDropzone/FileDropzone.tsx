@@ -39,22 +39,22 @@ const FileDropzone = (): ReactElement => {
   const theme = useMantineTheme()
 
   const [droppedFile, setDroppedFile] = useState<File | null>(null)
-  const [resultFile, setResultFile] = useState<string | null>(null)
-  const [statusMessage, setStatueMessage] = useState<string>('')
+  // const [resultFile, setResultFile] = useState<string | null>(null)
+  // const [statusMessage, setStatueMessage] = useState<string>('')
 
   const ffmpeg = createFFmpeg({
     log: true,
   });
 
   const doTranscode = async () => {
-    setStatueMessage('Loading ffmpeg-core.js');
+    // setStatueMessage('Loading ffmpeg-core.js');
     await ffmpeg.load();
-    setStatueMessage('Start transcoding');
+    // setStatueMessage('Start transcoding');
     ffmpeg.FS('writeFile', 'test.avi', await fetchFile('/flame.avi'));
     await ffmpeg.run('-i', 'test.avi', 'test.mp4');
-    setStatueMessage('Complete transcoding');
-    const data = ffmpeg.FS('readFile', 'test.mp4');
-    setResultFile(URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' })));
+    // setStatueMessage('Complete transcoding');
+    // const data = ffmpeg.FS('readFile', 'test.mp4');
+    // setResultFile(URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' })));
   };
 
   useEffect(() => {
@@ -63,26 +63,26 @@ const FileDropzone = (): ReactElement => {
 
   return (
     <>
-    <Dropzone onDrop={(files) => setDroppedFile(files[0])}>
-      {(status) => (
-        <Group position="center" spacing="xl" style={{ minHeight: 220, pointerEvents: 'none' }}>
-          <ImageUploadIcon
-            status={status}
-            style={{ width: 80, height: 80, color: getIconColor(status, theme) }}
-          />
+      <Dropzone onDrop={(files) => setDroppedFile(files[0])}>
+        {(status) => (
+          <Group position="center" spacing="xl" style={{ minHeight: 220, pointerEvents: 'none' }}>
+            <ImageUploadIcon
+              status={status}
+              style={{ width: 80, height: 80, color: getIconColor(status, theme) }}
+            />
 
-          <div>
-            <Text size="xl" inline>
-              Drag images here or click to select files
-            </Text>
-            <Text size="sm" color="dimmed" inline mt={7}>
-              Attach as many files as you like, each file should not exceed 5mb
-            </Text>
-          </div>
-        </Group>
-      )}
-    </Dropzone>
-    <Button onClick={doTranscode}>translate</Button>
+            <div>
+              <Text size="xl" inline>
+                Drag images here or click to select files
+              </Text>
+              <Text size="sm" color="dimmed" inline mt={7}>
+                Attach as many files as you like, each file should not exceed 5mb
+              </Text>
+            </div>
+          </Group>
+        )}
+      </Dropzone>
+      <Button onClick={doTranscode}>translate</Button>
     </>
   )
 }

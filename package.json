@@ -41,7 +41,31 @@
     "react-scripts:build": "react-scripts build"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "react",
+      "@typescript-eslint",
+      "prettier"
+    ],
+    "extends": [
+      "react-app",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:prettier/recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "linebreak-style": "off",
+      "import/prefer-default-export": "off",
+      "prettier/prettier": "off",
+      "import/extensions": "off",
+      "no-use-before-define": "off",
+      "import/no-unresolved": "off",
+      "no-shadow": "off",
+      "react/prop-types": "off",
+      "jsx-a11y/no-noninteractive-element-interactions": "off",
+      "@typescript-eslint/no-explicit-any": "off"
+    }
   },
   "browserslist": {
     "production": [
